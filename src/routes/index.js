@@ -1,19 +1,50 @@
-import 'react-native-gesture-handler';
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import "react-native-gesture-handler";
+import React, { useState, useEffect, useMemo } from "react";
+import AuthenticationRoutes from "./authentication.routes";
+import ApplicationRoutes from "./application.routes";
+import { NavigationContainer } from '@react-navigation/native';
+import { AuthContext } from "../context";
 
 // Screens
-import Login from '../pages/Login';
-import Register from '../pages/Register';
-
-const Stack = createStackNavigator();
+import Splash from "../pages/Splash";
 
 function Routes() {
-	return(
-		<Stack.Navigator>
-			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
-			<Stack.Screen name="Register" component={Register} />
-		</Stack.Navigator>
+	const [isLoading, setIsLoading] = useState(true);
+	const [userToken, setUserToken] = useState(null);
+
+	const authContext = useMemo(() => {
+		return {
+			signIn: () => {
+				setIsLoading(false);
+				setUserToken('asdgg');
+			},
+			signUp: () => {
+				setIsLoading(false);
+				setUserToken('asdgg');
+			},
+			signOut: () => {
+				setIsLoading(false);
+				setUserToken(null);
+			},
+		}
+	}, []);
+
+	useEffect(() => {
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 2000);
+	}, []);
+
+	if (isLoading) {
+		return <Splash />;
+	}
+
+	return (
+		<AuthContext.Provider value={authContext}>
+			<NavigationContainer>
+				{userToken ? (<ApplicationRoutes />) : (<AuthenticationRoutes />)}
+			</NavigationContainer>
+		</AuthContext.Provider>
 	)
 }
 

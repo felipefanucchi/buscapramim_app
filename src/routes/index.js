@@ -1,12 +1,13 @@
 import "react-native-gesture-handler";
 import React, { useState, useEffect, useMemo } from "react";
-import AuthenticationRoutes from "./authentication.routes";
-import ApplicationRoutes from "./application.routes";
 import { NavigationContainer } from '@react-navigation/native';
 import { AuthContext } from "../context";
 
 // Screens
 import Splash from "../pages/Splash";
+
+//Routes
+import RootRoutes from "./root.routes";
 
 function Routes() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -42,7 +43,7 @@ function Routes() {
 	return (
 		<AuthContext.Provider value={authContext}>
 			<NavigationContainer>
-				{userToken ? (<ApplicationRoutes />) : (<AuthenticationRoutes />)}
+				<RootRoutes userToken={userToken} />
 			</NavigationContainer>
 		</AuthContext.Provider>
 	)

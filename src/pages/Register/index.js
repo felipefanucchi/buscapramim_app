@@ -23,7 +23,7 @@ function Register() {
 	
 	return (
 		<View style={styles.backgroundCover}>
-			<Text style={styles.logo}>BUSCA<Text style={{fontWeight: 'bold'}}>PRA</Text>MIM</Text>
+			<Text style={styles.logo}>BUSCA<Text style={{fontWeight: '700'}}>PRA</Text>MIM</Text>
 			<Text style={{marginTop: 10, color: 'gray'}}>Crie sua conta</Text>
 			<View style={styles.panel}>
 				<TextInput style={styles.input} placeholder="Nome"/>

@@ -9,12 +9,11 @@ export default StyleSheet.create({
 		alignItems: 'center'
 	},
 	logo: {
-		fontWeight: 'lighter',
-		fontSize: '30px',
+		fontWeight: '100',
+		fontSize: 30,
 		color: '#E02041'
 	},
 	buttonText: {
-		flex: '0 0 50%',
 		margin: 0,
 		padding: 0,
 		color: '#444',
@@ -23,11 +22,10 @@ export default StyleSheet.create({
 	panel: {
 		backgroundColor: '#fff',
 		padding: 20,
-		borderRadius: '8px',
+		borderRadius: 8,
 		flexDirection: 'column',
 		width: '300px',
 		marginTop: 20,
-		boxShadow: '0 0 15px rgba(0, 0, 0, 0.1)'
 	},
 	buttonPrimary: {
 		flex: 1,

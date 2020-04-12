@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
@@ -14,17 +15,34 @@ function AuthenticationRoutes() {
 			<Stack.Screen 
 				name="Login" 
 				component={Login} 
-				options={{ title: 'Entrar' }}
+				options={{ 
+					title: 'Entrar',
+					headerShown: false
+				}}
 			/>
 			<Stack.Screen 
 				name="ForgotPassword" 
 				component={ForgotPassword} 
-				options={{ title: 'Esqueci minha senha' }}
+				options={{ 
+					title: null,
+					headerStyle: {
+						backgroundColor: 'transparent',
+						borderBottomWidth: 0
+					},
+					headerTintColor: '#E02041',
+				}}
 			/>
 			<Stack.Screen 
 				name="Register" 
 				component={Register} 
-				options={{ title: 'Criar conta' }}
+				options={{ 
+					title: null,
+					headerStyle: {
+            backgroundColor: 'transparent',
+						borderBottomWidth: 0
+					},
+					headerTintColor: '#E02041',
+				}}
 			/>
 		</Stack.Navigator>
 	);

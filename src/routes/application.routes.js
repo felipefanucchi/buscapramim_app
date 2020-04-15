@@ -7,18 +7,55 @@ import HomeRoutes from './home.routes';
 // Screens
 import Profile from '../pages/Profile';
 
+// Icons
+import { Feather } from '@expo/vector-icons';
+
 const Tab = createBottomTabNavigator();
 
 function ApplicationRoutes() {
 	return (
-		<Tab.Navigator>
+		<Tab.Navigator
+			screenOptions={({ route }) => ({
+				tabBarIcon: ({ focused, color, size }) => {
+					let iconName;
+					switch (route.name) {
+						case 'Necessidades':
+							iconName = 'map';
+							break;
+						case 'Usuários disponíveis':
+							iconName = 'users';
+							break;
+						case 'Perfil':
+							iconName = 'settings';
+							break;
+					}
+					return <Feather name={iconName} size={size} color={color} />;
+				}
+			})}
+			tabBarOptions={{
+				inactiveTintColor: '#FFF',
+				activeTintColor: '#EC2041',
+				activeBackgroundColor: '#FFF',
+				size: 20,
+				style: {
+					backgroundColor: '#EC2041',
+					height: 60
+				},
+				showLabel: false
+			}}
+			>
 			<Tab.Screen 
-				name="Home" 
+				name="Necessidades" 
 				options={{ headerShown: false }} 
 				component={HomeRoutes}
 			/>
 			<Tab.Screen 
-				name="Profile" 
+				name="Usuários disponíveis" 
+				options={{ headerShown: false }} 
+				component={HomeRoutes}
+			/>
+			<Tab.Screen 
+				name="Perfil" 
 				options={{ title: 'Perfil' }} 
 				component={Profile}
 			/>

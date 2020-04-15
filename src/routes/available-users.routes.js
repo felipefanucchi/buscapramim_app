@@ -2,19 +2,19 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
-import Home from '../pages/Home';
 import Detail from '../pages/Detail';
+import AvailableUsers from '../pages/AvailableUsers';
 
 const Stack = createStackNavigator();
 
-function HomeRoutes() {
+function AvailableRoutes() {
 	return (
 		<Stack.Navigator>
 			<Stack.Screen 
-				name="Home" 
-				component={Home} 
+				name="Avaialable Users" 
+				component={AvailableUsers} 
 				options={{ 
-					title: 'Necessidades próximas',
+					title: 'Usuários Disponíveis',
 					headerTintColor: '#FFF',
 					headerStyle: {
 						backgroundColor: '#EC2041'
@@ -36,4 +36,4 @@ function HomeRoutes() {
 	);
 }
 
-export default HomeRoutes;
+export default AvailableRoutes;

@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // Routes
 import HomeRoutes from './home.routes';
+import AvailableRoutes from './available-users.routes';
 
 // Screens
 import Profile from '../pages/Profile';
@@ -52,7 +53,7 @@ function ApplicationRoutes() {
 			<Tab.Screen 
 				name="Usuários disponíveis" 
 				options={{ headerShown: false }} 
-				component={HomeRoutes}
+				component={AvailableRoutes}
 			/>
 			<Tab.Screen 
 				name="Perfil" 

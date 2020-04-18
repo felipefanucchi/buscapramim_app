@@ -5,7 +5,7 @@ import styles from './styles';
 function AvailableUsers({ route }) {
 	return (
 		<View style={styles.container}>
-			<Text style={{ fontSize: 16, marginBottom: 30, color: '#444' }}> Procure pela pessoa mais próxima de você, para te ajudar.</Text>
+			<Text style={styles.welcomeText}>Abaixo você encontra pessoas disponíveis e prontas para te ajudar!</Text>
 			<View style={styles.card}>
 				<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
 					<Text style={styles.cardLabel}><Text style={styles.cardValue}>Felipe Fanucchi</Text></Text>

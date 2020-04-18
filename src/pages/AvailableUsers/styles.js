@@ -3,16 +3,18 @@ import Constants from 'expo-constants';
 
 export default StyleSheet.create({
 	container: {
-    paddingTop: Constants.statusBarHeight + 20,
 		flex: 1,
-		paddingHorizontal: 25
+	},
+	welcomeText: { 
+		fontSize: 16,
+		marginBottom: 30, 
+		color: '#444',
+		padding: 20
 	},
 	card: {
 		// backgroundColor: '#f0f0f0',
 		// borderRadius: 12,
-		// padding: 10,
 		// marginBottom: 15,
-		// shadowColor: "#000",
 		// height: 100,
 		// shadowOffset: {
 		// 	width: 0,
@@ -21,9 +23,8 @@ export default StyleSheet.create({
 		// shadowOpacity: 0.25,
 		// shadowRadius: 3.84,
 		// elevation: 5,
-		borderBottomColor: 'black',
-		borderBottomWidth: 1,
-		paddingBottom: 15
+		// paddingBottom: 15,
+		// paddingHorizontal: 20
 	},
 	cardLabel: {
 		fontWeight: '700',

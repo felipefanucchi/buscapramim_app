@@ -29,7 +29,10 @@ function AuthenticationRoutes() {
 						title: null,
 						headerStyle: {
 							backgroundColor: 'transparent',
-							borderBottomWidth: 0
+							borderBottomWidth: 0,
+							elevation: 0,
+							shadowOpacity: 0,
+							shadowColor: 'none'
 						},
 						headerTintColor: '#E02041',
 					}}
@@ -41,7 +44,10 @@ function AuthenticationRoutes() {
 						title: null,
 						headerStyle: {
 							backgroundColor: 'transparent',
-							borderBottomWidth: 0
+							borderBottomWidth: 0,
+							elevation: 0,
+							shadowOpacity: 0,
+							shadowColor: 'none'
 						},
 						headerTintColor: '#E02041',
 					}}

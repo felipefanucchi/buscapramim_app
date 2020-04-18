@@ -18,7 +18,7 @@ function Login({ navigation }) {
 					onPress={() => signIn()}
 					color="#E02041"
 				/>
-				<View style={{ flexDirection:'row', flex: 1, justifyContent: 'space-between' }}>
+				<View style={{ flexDirection:'row', justifyContent: 'space-between' }}>
 					<Text
 						style={styles.buttonText}
 						onPress={() => navigation.push('Register')}>Crie sua conta</Text>

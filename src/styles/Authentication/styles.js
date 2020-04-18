@@ -24,7 +24,7 @@ export default StyleSheet.create({
 		padding: 20,
 		borderRadius: 8,
 		flexDirection: 'column',
-		width: '300px',
+		width: 300,
 		marginTop: 20,
 	},
 	buttonPrimary: {

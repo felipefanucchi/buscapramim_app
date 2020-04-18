@@ -1,25 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Button, View } from 'react-native';
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_GOOGLE, Callout} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import styles from './styles';
 import mapStyleConfig from './mapStyleConfig';
 import * as Location from 'expo-location';
 import { getPixelSize } from '../../utils';
+import cartBuyMarket from '../../../assets/cart-buy-market.png'
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyANApQdINHhAihyiBI67nVnSB3F2mn_Ugo';
 
 function Home({ navigation }) {
 	const deltaLatLong = {latitudeDelta: 0.0143, longitudeDelta: 0.0134};
-	const mapStyle = (new Date().getHours() > 19) ? mapStyleConfig : null;
+	const mapStyle = (new Date().getHours() >= 19) ? mapStyleConfig : null;
 	const [destination, setDestination] = useState(false);
+	const [duration, setDuration] = useState(null);
+	const [distance, setDistance] = useState(null);
 	const [mapView, setMapView] = useState(false);
+	const [showLabel, setShowLabel] = useState(false);
 
 	const [region, setRegion] = useState({
 		latitude: 0,
 		longitude: 0,
 		...deltaLatLong
 	});
+
+
+	// Mocked Markers
+	const markers = [
+		{
+			latitude: -23.464624, 
+			longitude: -46.541213
+		},
+		{
+			latitude: -23.504908,
+			longitude: -46.556163,
+		},
+		{
+			latitude: -23.467633,
+			longitude: -46.541339,
+		}
+	]
 
 	useEffect(() => {
 		(async () => {
@@ -40,9 +61,10 @@ function Home({ navigation }) {
 	}, []);
 
 
-	function handleDestinationSelected({ nativeEvent: { coordinate } }) {
-		const { latitude, longitude } = coordinate;
+	function handleDestinationSelected(event, id) {
+		const { latitude, longitude } = event.nativeEvent.coordinate;
 		setDestination({ latitude, longitude });
+		setShowLabel(id);
 	}
 	
 	return(
@@ -55,15 +77,30 @@ function Home({ navigation }) {
 				loadingEnabled 
 				customMapStyle={mapStyle}
 				ref={el => setMapView(el)}>
-				<Marker
-					coordinate={{
-						latitude: -23.504908,
-						longitude: -46.556163,
-					}}
-					title={"Felipe Fanucchi"}
-					description={"Apartamento 83 C - Em frente a academia sanchez"}
-					onPress={handleDestinationSelected}
-				/>
+
+				{markers.map((marker, index) => (
+					<Marker
+						coordinate={marker}
+						image={cartBuyMarket}
+						onPress={(event) => handleDestinationSelected(event, index)}
+						anchor={{ x: 0, y: 0 }}
+						key={index}>
+						{showLabel === index && <View style={styles.locationBox}>
+							<Text numberOfLines={1} style={styles.locationText}>{distance}KM</Text>
+						</View>}
+					</Marker>)
+				)}
+
+				{destination && (<Marker
+					coordinate={region}>
+					<View style={styles.myLocationBox}>
+							<Text numberOfLines={1} style={styles.myLocationText}>R. Nadir</Text>
+							<View style={styles.myLocationTimeBox}>
+								<Text style={styles.myLocationTime}>{duration}</Text>
+								<Text style={styles.myLocationTimeSmall}>MIN</Text>
+							</View>
+						</View>
+				</Marker>)}
 
 				{destination && (<MapViewDirections
 					origin={region}
@@ -71,7 +108,11 @@ function Home({ navigation }) {
 					strokeWidth={3}
 					strokeColor="#EC2041"
 					apikey={GOOGLE_MAPS_APIKEY}
+					timePrecision="now"
 					onReady={result => {
+						setDuration(Math.floor(result.duration));
+						setDistance(result.distance.toFixed(2));
+
 						mapView.fitToCoordinates(result.coordinates, {
 							edgePadding: {
 								right: getPixelSize(80),

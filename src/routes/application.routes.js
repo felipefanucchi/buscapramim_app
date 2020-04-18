@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { StatusBar } from 'react-native';
 
 // Routes
 import HomeRoutes from './home.routes';
@@ -15,52 +16,55 @@ const Tab = createBottomTabNavigator();
 
 function ApplicationRoutes() {
 	return (
-		<Tab.Navigator
-			screenOptions={({ route }) => ({
-				tabBarIcon: ({ focused, color, size }) => {
-					let iconName;
-					switch (route.name) {
-						case 'Necessidades':
-							iconName = 'map';
-							break;
-						case 'Usuários disponíveis':
-							iconName = 'users';
-							break;
-						case 'Perfil':
-							iconName = 'settings';
-							break;
+		<>
+		<StatusBar barStyle="light-content" backgroundColor="#EC2041"></StatusBar>
+			<Tab.Navigator
+				screenOptions={({ route }) => ({
+					tabBarIcon: ({ focused, color, size }) => {
+						let iconName;
+						switch (route.name) {
+							case 'Necessidades':
+								iconName = 'map';
+								break;
+							case 'Usuários disponíveis':
+								iconName = 'users';
+								break;
+							case 'Perfil':
+								iconName = 'settings';
+								break;
+						}
+						return <Feather name={iconName} size={size} color={color} />;
 					}
-					return <Feather name={iconName} size={size} color={color} />;
-				}
-			})}
-			tabBarOptions={{
-				inactiveTintColor: '#FFF',
-				activeTintColor: '#EC2041',
-				activeBackgroundColor: '#FFF',
-				size: 20,
-				style: {
-					backgroundColor: '#EC2041',
-					height: 60
-				},
-				showLabel: false
-			}}
-			>
-			<Tab.Screen 
-				name="Necessidades" 
-				options={{ headerShown: false }} 
-				component={HomeRoutes}
-			/>
-			<Tab.Screen 
-				name="Usuários disponíveis" 
-				options={{ headerShown: false }} 
-				component={AvailableRoutes}
-			/>
-			<Tab.Screen 
-				name="Perfil" 
-				options={{ title: 'Perfil' }} 
-				component={Profile}
-			/>
-		</Tab.Navigator>
+				})}
+				tabBarOptions={{
+					inactiveTintColor: '#FFF',
+					activeTintColor: '#EC2041',
+					activeBackgroundColor: '#FFF',
+					size: 20,
+					style: {
+						backgroundColor: '#EC2041',
+						height: 60
+					},
+					showLabel: false
+				}}
+				>
+				<Tab.Screen 
+					name="Necessidades" 
+					options={{ headerShown: false }} 
+					component={HomeRoutes}
+				/>
+				<Tab.Screen 
+					name="Usuários disponíveis" 
+					options={{ headerShown: false }} 
+					component={AvailableRoutes}
+				/>
+				<Tab.Screen 
+					name="Perfil" 
+					options={{ title: 'Perfil' }} 
+					component={Profile}
+				/>
+			</Tab.Navigator>
+		</>
 	);
 }
 

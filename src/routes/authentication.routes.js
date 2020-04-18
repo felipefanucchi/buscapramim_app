@@ -11,40 +11,43 @@ const Stack = createStackNavigator();
 
 function AuthenticationRoutes() {
 	return (
-		<Stack.Navigator>
-			<Stack.Screen 
-				name="Login" 
-				component={Login} 
-				options={{ 
-					title: 'Entrar',
-					headerShown: false
-				}}
-			/>
-			<Stack.Screen 
-				name="ForgotPassword" 
-				component={ForgotPassword} 
-				options={{ 
-					title: null,
-					headerStyle: {
-						backgroundColor: 'transparent',
-						borderBottomWidth: 0
-					},
-					headerTintColor: '#E02041',
-				}}
-			/>
-			<Stack.Screen 
-				name="Register" 
-				component={Register} 
-				options={{ 
-					title: null,
-					headerStyle: {
-            backgroundColor: 'transparent',
-						borderBottomWidth: 0
-					},
-					headerTintColor: '#E02041',
-				}}
-			/>
-		</Stack.Navigator>
+		<>
+			<StatusBar hidden={true}></StatusBar>
+			<Stack.Navigator>
+				<Stack.Screen 
+					name="Login" 
+					component={Login} 
+					options={{ 
+						title: 'Entrar',
+						headerShown: false
+					}}
+				/>
+				<Stack.Screen 
+					name="ForgotPassword" 
+					component={ForgotPassword} 
+					options={{ 
+						title: null,
+						headerStyle: {
+							backgroundColor: 'transparent',
+							borderBottomWidth: 0
+						},
+						headerTintColor: '#E02041',
+					}}
+				/>
+				<Stack.Screen 
+					name="Register" 
+					component={Register} 
+					options={{ 
+						title: null,
+						headerStyle: {
+							backgroundColor: 'transparent',
+							borderBottomWidth: 0
+						},
+						headerTintColor: '#E02041',
+					}}
+				/>
+			</Stack.Navigator>
+		</>
 	);
 }
 

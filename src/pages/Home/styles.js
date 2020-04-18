@@ -25,6 +25,7 @@ export default StyleSheet.create({
 		borderWidth: 1,
 		marginTop: 15,
 		marginLeft: 25,
+		marginBottom: 40
 	},
 	locationText: {
 		marginHorizontal: 10,

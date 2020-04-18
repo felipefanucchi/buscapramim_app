@@ -7,6 +7,7 @@ import mapStyleConfig from './mapStyleConfig';
 import * as Location from 'expo-location';
 import { getPixelSize } from '../../utils';
 import cartBuyMarket from '../../../assets/cart-buy-market.png'
+import Geocoder from 'react-native-geocoding';
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyANApQdINHhAihyiBI67nVnSB3F2mn_Ugo';
 
@@ -15,6 +16,7 @@ function Home({ navigation }) {
 	const mapStyle = (new Date().getHours() >= 19) ? mapStyleConfig : null;
 	const [destination, setDestination] = useState(false);
 	const [duration, setDuration] = useState(null);
+	const [location, setLocation] = useState(null);
 	const [distance, setDistance] = useState(null);
 	const [mapView, setMapView] = useState(false);
 	const [showLabel, setShowLabel] = useState(false);
@@ -46,12 +48,19 @@ function Home({ navigation }) {
 		(async () => {
 			let { status } = await Location.requestPermissionsAsync();
 
+			Geocoder.init(GOOGLE_MAPS_APIKEY);
+
 			if (status !== 'granted') {
 				throw new Error('You must grant access to location');
 			}
 
 			let {coords: {latitude, longitude}} = await Location.getCurrentPositionAsync();
-			
+
+			const response = await Geocoder.from({ latitude, longitude });
+			const address = response.results[0].formatted_address;
+			const location = address.substring(0, address.indexOf(','));
+			setLocation(location);
+
 			setRegion({
 				latitude, 
 				longitude,
@@ -94,7 +103,7 @@ function Home({ navigation }) {
 				{destination && (<Marker
 					coordinate={region}>
 					<View style={styles.myLocationBox}>
-							<Text numberOfLines={1} style={styles.myLocationText}>R. Nadir</Text>
+							<Text numberOfLines={1} style={styles.myLocationText}>{location}</Text>
 							<View style={styles.myLocationTimeBox}>
 								<Text style={styles.myLocationTime}>{duration}</Text>
 								<Text style={styles.myLocationTimeSmall}>MIN</Text>
@@ -109,10 +118,9 @@ function Home({ navigation }) {
 					strokeColor="#EC2041"
 					apikey={GOOGLE_MAPS_APIKEY}
 					timePrecision="now"
-					onReady={result => {
-						setDuration(Math.floor(result.duration));
-						setDistance(result.distance.toFixed(2));
-
+					onReady={result => (async () => {
+						await setDuration(Math.floor(result.duration));
+						await setDistance(result.distance.toFixed(2));
 						mapView.fitToCoordinates(result.coordinates, {
 							edgePadding: {
 								right: getPixelSize(80),
@@ -121,7 +129,7 @@ function Home({ navigation }) {
 								left: getPixelSize(80),
 							},
 						});
-					}}
+					})()}
 				/>)}
 			</MapView>
 		</View>

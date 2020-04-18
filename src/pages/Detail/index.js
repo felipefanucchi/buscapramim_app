@@ -1,9 +1,11 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
-function Detail({ route }) {
+function Detail() {
 	return (
-		<Text> você está no caso: { route.params.name }</Text>
+		<View style={styles.container}>
+
+		</View>
 	);
 }
 

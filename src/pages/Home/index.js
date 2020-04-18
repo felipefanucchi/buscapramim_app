@@ -9,6 +9,8 @@ import { getPixelSize } from '../../utils';
 import cartBuyMarket from '../../../assets/cart-buy-market.png'
 import Geocoder from 'react-native-geocoding';
 
+import RangeButtons from '../../components/range-buttons';
+
 const GOOGLE_MAPS_APIKEY = 'AIzaSyANApQdINHhAihyiBI67nVnSB3F2mn_Ugo';
 
 function Home({ navigation }) {
@@ -78,6 +80,9 @@ function Home({ navigation }) {
 	
 	return(
 		<View style={styles.container}>
+
+			<RangeButtons />
+
 			<MapView
 				provider={PROVIDER_GOOGLE}
 				style={styles.mapStyle}

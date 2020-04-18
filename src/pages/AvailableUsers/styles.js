@@ -3,10 +3,11 @@ import Constants from 'expo-constants';
 
 export default StyleSheet.create({
 	container: {
-    paddingTop: Constants.statusBarHeight + 20,
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#EC2041'
+		paddingHorizontal: 20,
+		paddingVertical: 30
 	},
+	welcomeText: {
+		marginBottom: 20,
+		fontWeight: '600'
+	}
 });

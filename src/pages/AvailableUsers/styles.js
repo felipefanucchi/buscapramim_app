@@ -12,31 +12,25 @@ export default StyleSheet.create({
 		padding: 20
 	},
 	card: {
-		// backgroundColor: '#f0f0f0',
-		// borderRadius: 12,
-		// marginBottom: 15,
-		// height: 100,
-		// shadowOffset: {
-		// 	width: 0,
-		// 	height: 2,
-		// },
-		// shadowOpacity: 0.25,
-		// shadowRadius: 3.84,
-		// elevation: 5,
-		// paddingBottom: 15,
-		// paddingHorizontal: 20
+		borderBottomColor: '#808080',
+		borderBottomWidth: 1,
+		paddingBottom: 10,
+		paddingHorizontal: 20,
+		paddingTop: 10,
 	},
 	cardLabel: {
 		fontWeight: '700',
 		color: '#444',
 	},
-	cardValue: {
-		fontWeight: '100'
-	},
 	cardLabelAddress: {
-		fontWeight: '700',
-		color: '#444',
-		flex: 1,
+		color: '#999999',
+		marginTop: 5,
+		marginBottom: 5,
 		justifyContent: 'flex-end'
+	},
+	cardLabelDistance: {
+		color: '#EC2041',
+		fontWeight: '700',
+		fontSize: 17
 	}
 });

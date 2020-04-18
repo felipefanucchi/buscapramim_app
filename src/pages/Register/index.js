@@ -1,25 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { View, Text, Button, TextInput } from 'react-native';
 import { AuthContext } from '../../context';
-import * as Location from 'expo-location';
 import styles from '../../styles/Authentication/styles';
 
 function Register() {
-  const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 	const { signUp } = useContext(AuthContext);
-
-	useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Acesso a localização negado!');
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-	}, []);
 	
 	return (
 		<View style={styles.backgroundCover}>

@@ -26,7 +26,12 @@
     },
     "android": {
       "package": "com.fanucchi.buscapramim",
-      "versionCode": 1
+      "versionCode": 1,
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyANApQdINHhAihyiBI67nVnSB3F2mn_Ugo"
+        }
+      }
     }
   }
 }

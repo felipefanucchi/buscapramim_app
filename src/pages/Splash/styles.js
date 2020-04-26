@@ -11,7 +11,7 @@ export default StyleSheet.create({
 	welcomeTitle: {
 		color: '#FFF',
 		fontWeight: '100',
-		fontSize: 40,
+		fontSize: 35,
 		marginBottom: 20,
 		fontFamily: 'MontSerratLight'
 	},

@@ -3,11 +3,24 @@ import {StyleSheet} from 'react-native'
 export default StyleSheet.create({
 	container: {
 		position: 'absolute',
-		bottom: 40,
+		bottom: 20,
 		justifyContent: 'center',
-		backgroundColor: 'red',
-		width: 300,
-		height: 45,
-		zIndex: 999
+		zIndex: 999,
+		borderRadius: 10,
+		flexDirection: 'row'
+	},
+	button: {
+		backgroundColor: '#EC2041',
+		width: 50,
+		height: 40,
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	buttonText: {
+		color: '#FFF',
+		fontSize: 12,
+		textAlign: 'center',
+		fontFamily: 'MontSerratLight',
+		textTransform: 'uppercase'
 	}
 });

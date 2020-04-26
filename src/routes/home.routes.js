@@ -16,8 +16,12 @@ function HomeRoutes() {
 				options={{ 
 					title: 'Necessidades próximas',
 					headerTintColor: '#FFF',
+					headerTitleStyle: {
+						fontSize: 20,
+						fontFamily: 'MontSerratSemiBold',
+					},
 					headerStyle: {
-						backgroundColor: '#EC2041'
+						backgroundColor: '#EC2041',
 					}
 				}}
 			/>
@@ -28,7 +32,9 @@ function HomeRoutes() {
 					title: route.params.name,
 					headerTintColor: '#FFF',
 					headerStyle: {
-						backgroundColor: '#EC2041'
+						backgroundColor: '#EC2041',
+						fontSize: 18,
+						fontFamily: 'MontSerratSemiBold'
 					}
 				})}
 			/>

@@ -14,11 +14,7 @@ function AvailableRoutes() {
 				name="Avaialable Users" 
 				component={AvailableUsers} 
 				options={{ 
-					title: 'Usuários Disponíveis',
-					headerTintColor: '#FFF',
-					headerStyle: {
-						backgroundColor: '#EC2041'
-					}
+					headerShown: false
 				}}
 			/>
 			<Stack.Screen 
@@ -28,7 +24,8 @@ function AvailableRoutes() {
 					title: route.params.name,
 					headerTintColor: '#FFF',
 					headerStyle: {
-						backgroundColor: '#EC2041'
+						backgroundColor: '#EC2041',
+						fontFamily: 'MontSerratSemiBold'
 					}
 				})}
 			/>

@@ -2,13 +2,21 @@ import React, { useContext } from 'react';
 import { Text, View } from 'react-native';
 import { AuthContext } from '../../context';
 
+import * as content from '../../styles/CustomContent/styles';
+import styles from './styles';
+
 function Profile() {
 	const {signOut} = useContext(AuthContext);
 
 	return(
-		<View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#EC2041'}}>
-			<Text style={{ color: '#FFF' }}>Olá, você está na tela de perfil.</Text>
-			<Text style={{ color: '#FFF' }} onPress={() => signOut()}>Sair</Text>
+		<View style={content.styles.background}>
+			<View style={content.styles.header}>
+				<Text style={content.styles.headerTitle}>Configurações</Text> 
+				<Text style={content.styles.headerSubtitle}>Informações da sua conta</Text> 
+			</View>
+			<View style={content.styles.content}>
+
+			</View>
 		</View>
 	);
 }

@@ -12,11 +12,13 @@ export default StyleSheet.create({
 		padding: 20
 	},
 	card: {
-		borderBottomColor: '#808080',
+		borderBottomColor: '#999999',
 		borderBottomWidth: 1,
 		paddingBottom: 10,
 		paddingHorizontal: 20,
 		paddingTop: 10,
+		flexDirection: 'row',
+		// flex: 1
 	},
 	cardLabel: {
 		fontWeight: '700',

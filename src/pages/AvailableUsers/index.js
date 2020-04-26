@@ -1,12 +1,17 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import * as content from '../../styles/CustomContent/styles';
 import styles from './styles';
 import { Feather } from '@expo/vector-icons'
 
 function AvailableUsers({ route }) {
 	return (
-		<View style={styles.container}>
-			<Text style={styles.welcomeText}>Abaixo você encontra pessoas disponíveis e prontas para te ajudar!</Text>
+		<View style={content.styles.background}>
+		<View style={content.styles.header}>
+			<Text style={content.styles.headerTitle}>Usuários Disponíveis</Text> 
+			<Text style={content.styles.headerSubtitle}>Abaixo você encontra pessoas disponíveis e prontas para te ajudar!</Text> 
+		</View>
+		<View style={content.styles.content}>
 			<View style={styles.card}>
 				<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
 					<View style={styles.cardInfo}>
@@ -18,6 +23,7 @@ function AvailableUsers({ route }) {
 				</View>
 			</View>
 		</View>
+	</View>
 	);
 }
 

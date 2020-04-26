@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Text, View, Button, TextInput } from 'react-native';
+import { Text, View, TouchableHighlight, TextInput } from 'react-native';
 import { AuthContext } from '../../context';
 import styles from '../../styles/Authentication/styles';
 
@@ -8,16 +8,15 @@ function Login({ navigation }) {
 
   return (
     <View style={styles.backgroundCover}>
-      <Text style={styles.logo}>BUSCA<Text style={{fontWeight: '700'}}>PRA</Text>MIM</Text>
+      <Text style={styles.logo}>BUSCA<Text style={{fontFamily: 'MontSerratBold'}}>PRA</Text>MIM</Text>
 			<View style={styles.panel}>
 				<TextInput style={styles.input} placeholder="E-mail"></TextInput>
 				<TextInput secureTextEntry={true} style={styles.input} placeholder="Senha"></TextInput>
-				<Button
-					style={styles.buttonPrimary}
-					title="Entrar" 
-					onPress={() => signIn()}
-					color="#E02041"
-				/>
+				<TouchableHighlight style={styles.buttonPrimary} onPress={() => signIn()}>
+					<Text style={styles.buttonPrimaryText}>
+						Entrar
+					</Text>
+				</TouchableHighlight>
 				<View style={{ flexDirection:'row', justifyContent: 'space-between' }}>
 					<Text
 						style={styles.buttonText}

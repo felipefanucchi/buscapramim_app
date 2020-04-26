@@ -9,7 +9,7 @@ export default StyleSheet.create({
 		alignItems: 'center'
 	},
 	logo: {
-		fontWeight: '100',
+		fontFamily: 'MontSerratLight',
 		fontSize: 30,
 		color: '#E02041'
 	},
@@ -17,7 +17,8 @@ export default StyleSheet.create({
 		margin: 0,
 		padding: 0,
 		color: '#444',
-		marginTop: 20
+		marginTop: 20,
+		fontFamily: 'MontSerratRegular'
 	},
 	panel: {
 		backgroundColor: '#fff',
@@ -28,13 +29,22 @@ export default StyleSheet.create({
 		marginTop: 20,
 	},
 	buttonPrimary: {
-		flex: 1,
-		marginBottom: 20,
+		justifyContent: 'center',
+		borderRadius: 3,
+		backgroundColor: '#EC2041',
+	},
+	buttonPrimaryText: {
+		fontFamily: 'MontSerratBold',
+		color: 'white',
+		textAlign: 'center',
+		lineHeight: 32,
+		textTransform: 'uppercase'
 	},
 	input: {
 		height: 40,
 		borderBottomColor: 'gray',
 		borderBottomWidth: 1,
-		marginBottom: 15
+		marginBottom: 15,
+		fontFamily: 'MontSerratItalic'
 	}
 });

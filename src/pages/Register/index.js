@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, Text, Button, TextInput } from 'react-native';
+import { View, Text, Button, TextInput, TouchableHighlight } from 'react-native';
 import { AuthContext } from '../../context';
 import styles from '../../styles/Authentication/styles';
 
@@ -9,8 +9,8 @@ function Register() {
 	
 	return (
 		<View style={styles.backgroundCover}>
-			<Text style={styles.logo}>BUSCA<Text style={{fontWeight: '700'}}>PRA</Text>MIM</Text>
-			<Text style={{marginTop: 10, color: 'gray'}}>Crie sua conta</Text>
+			<Text style={styles.logo}>BUSCA<Text style={{fontFamily: 'MontSerratBold'}}>PRA</Text>MIM</Text>
+			<Text style={{marginTop: 10, color: 'gray', fontFamily: 'MontSerratSemiBold'}}>Crie sua conta</Text>
 			<View style={styles.panel}>
 				<TextInput style={styles.input} placeholder="Nome"/>
 				<TextInput style={styles.input} placeholder="E-mail" />
@@ -18,12 +18,11 @@ function Register() {
 				<TextInput secureTextEntry={true} style={styles.input} placeholder="Senha" />
 				<TextInput secureTextEntry={true} style={styles.input} placeholder="Confirme a senha" />
 				{errorMsg ? <Text>{errorMsg}</Text> : null}
-				<Button
-					style={styles.buttonPrimary}
-					title="Cadastrar" 
-					onPress={() => signUp()}
-					color="#E02041"
-				/>
+				<TouchableHighlight style={styles.buttonPrimary} onPress={() => signUp()}>
+					<Text style={styles.buttonPrimaryText}>
+					Cadastrar
+					</Text>
+				</TouchableHighlight>
 			</View>
 		</View>
 	);

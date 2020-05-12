@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import AuthenticationRoutes from "./authentication.routes";
 import ApplicationRoutes from "./application.routes";
 import { createStackNavigator } from "@react-navigation/stack";
+import { AuthContext } from "../context/Auth";
 
 const Stack = createStackNavigator();
 
-function RootRoutes({ userToken }) {
+// Screens
+import Splash from "../pages/Splash";
+
+function RootRoutes() {
+	const { token } = useContext(AuthContext);
+	
+	useEffect(() => {
+		console.log(token);
+	}, [])
+
+	// if (isLoading) {
+	// 	return <Splash />;
+	// }
+
 	return (
 		<Stack.Navigator headerMode="none">
-			{userToken ? (
+			{token ? (
 				<Stack.Screen
 					name="Application"
 					component={ApplicationRoutes}

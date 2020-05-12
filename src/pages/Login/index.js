@@ -10,8 +10,7 @@ function Login({ navigation }) {
 
 	async function login() {
 		try {
-			const response = await signIn({ email, password });
-			console.log(response.data);
+			signIn({ email, password });
 		} catch (err) {
 			console.log(err);
 		}

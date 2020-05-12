@@ -1,11 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { View, Text, Button, TextInput, TouchableHighlight } from 'react-native';
-import { AuthContext } from '../../context';
 import styles from '../../styles/Authentication/styles';
 
 function Register() {
   const [errorMsg, setErrorMsg] = useState(null);
-	const { signUp } = useContext(AuthContext);
 	
 	return (
 		<View style={styles.backgroundCover}>
@@ -18,7 +16,7 @@ function Register() {
 				<TextInput secureTextEntry={true} style={styles.input} placeholder="Senha" />
 				<TextInput secureTextEntry={true} style={styles.input} placeholder="Confirme a senha" />
 				{errorMsg ? <Text>{errorMsg}</Text> : null}
-				<TouchableHighlight style={styles.buttonPrimary} onPress={() => signUp()}>
+				<TouchableHighlight style={styles.buttonPrimary} onPress={() => {}}>
 					<Text style={styles.buttonPrimaryText}>
 					Cadastrar
 					</Text>

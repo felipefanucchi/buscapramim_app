@@ -1,13 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { Text, View, Switch, ScrollView } from 'react-native';
-import { AuthContext } from '../../context';
 import { Feather } from '@expo/vector-icons'
 
 import * as content from '../../styles/ListContent/styles';
 import styles from './styles';
 
 function Profile() {
-	const {signOut} = useContext(AuthContext);
   const [isEnabled, setIsEnabled] = useState(false);
 
 	return(

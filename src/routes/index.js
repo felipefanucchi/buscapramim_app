@@ -1,7 +1,8 @@
 import "react-native-gesture-handler";
 import React, { useState, useEffect, useMemo } from "react";
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from "@react-navigation/native";
 import { AuthContext } from "../context";
+import { AuthProvider } from '../context/Auth'
 
 // Screens
 import Splash from "../pages/Splash";
@@ -17,17 +18,17 @@ function Routes() {
 		return {
 			signIn: () => {
 				setIsLoading(false);
-				setUserToken('asdgg');
+				setUserToken("asdgg");
 			},
 			signUp: () => {
 				setIsLoading(false);
-				setUserToken('asdgg');
+				setUserToken("asdgg");
 			},
 			signOut: () => {
 				setIsLoading(false);
 				setUserToken(null);
-			},
-		}
+			}
+		};
 	}, []);
 
 	useEffect(() => {
@@ -41,12 +42,12 @@ function Routes() {
 	}
 
 	return (
-		<AuthContext.Provider value={authContext}>
-			<NavigationContainer>
-				<RootRoutes userToken={userToken} />
-			</NavigationContainer>
-		</AuthContext.Provider>
-	)
+		<NavigationContainer>
+			<AuthProvider>
+				<RootRoutes userToken={false} />
+			</AuthProvider>
+		</NavigationContainer>
+	);
 }
 
 export default Routes;

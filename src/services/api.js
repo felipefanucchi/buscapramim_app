@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://10.0.3.2:3333/' // Genymotion Simulator
+  baseURL: 'http://192.168.15.4:3333/' // Genymotion Simulator
 });
 
 axios.defaults.headers.common['Content-Type'] = 'application/json';

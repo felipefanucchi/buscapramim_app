@@ -4,13 +4,13 @@ import { AuthContext } from "../../context/Auth";
 import styles from "../../styles/Authentication/styles";
 
 function Login({ navigation }) {
-	const { signIn } = useContext(AuthContext);
+	const { signIn, token } = useContext(AuthContext);
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
 
 	async function login() {
 		try {
-			signIn({ email, password });
+			await signIn({ email, password });
 		} catch (err) {
 			console.log(err);
 		}

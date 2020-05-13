@@ -11,8 +11,10 @@ export function AuthProvider({ children }) {
 			const response = await api.post('login', data);
 			const {token} = response.data;
 			setToken(token);
-			getUser(token);
+			getUser(token); 
+			return response;
 		} catch(err) {
+			if (err.response) return err.response;
 			return err;
 		}
 	}
@@ -20,8 +22,9 @@ export function AuthProvider({ children }) {
 	async function register(data) {
 		try {
 			const response = await api.post('register', data);
-			console.log(response.data);
+			return response;
 		} catch(err) {
+			if (err.response) return err.response;
 			return err;
 		}
 	}
@@ -37,8 +40,18 @@ export function AuthProvider({ children }) {
 		setUser(user);
 	}
 
+	async function forgotPassword(data) {
+		try {
+			const response = await api.post('forgot_password', data);
+			return response;
+		} catch (err) {
+			if (err.response) return err.response;
+			return err;
+		}
+	}
+
 	return (
-		<AuthContext.Provider value={{ signIn, token, register }}>
+		<AuthContext.Provider value={{ signIn, token, register, forgotPassword }}>
 			{ children }
 		</AuthContext.Provider>
 	);

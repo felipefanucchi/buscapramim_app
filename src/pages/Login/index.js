@@ -1,18 +1,23 @@
 import React, { useContext, useState } from "react";
-import { Text, View, TouchableHighlight, TextInput } from "react-native";
+import { Text, View, TouchableHighlight, TextInput, Alert } from "react-native";
 import { AuthContext } from "../../context/Auth";
 import styles from "../../styles/Authentication/styles";
 
 function Login({ navigation }) {
-	const { signIn, token } = useContext(AuthContext);
+	const { signIn } = useContext(AuthContext);
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
 
 	async function login() {
 		try {
-			await signIn({ email, password });
+			const response = await signIn({ email, password });
+			console.log({ email, password });
+			if (response.status === 200)  return;
+
+			Alert.alert('Erro no login', response.data.error);
 		} catch (err) {
 			console.log(err);
+			Alert.alert("Erro no login", err.data.error);
 		}
 
 	}

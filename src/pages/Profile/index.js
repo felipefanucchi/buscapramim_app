@@ -1,12 +1,54 @@
-import React, { useContext, useState } from 'react';
-import { Text, View, Switch, ScrollView } from 'react-native';
+import React, { useContext, useState, useEffect } from 'react';
+import { Text, View, Switch, ScrollView, Alert } from 'react-native';
 import { Feather } from '@expo/vector-icons'
 
 import * as content from '../../styles/ListContent/styles';
 import styles from './styles';
+import { AuthContext } from '../../context/Auth';
+import { api } from '../../services/api';
 
 function Profile() {
-  const [isEnabled, setIsEnabled] = useState(false);
+	const [isEnabled, setIsEnabled] = useState(false);
+	const [userAvailability, setUserAvailability] = useState(null);
+	const { logout } = useContext(AuthContext);
+	const { user: currentUser } = useContext(AuthContext);
+	const { token } = useContext(AuthContext);
+
+	useEffect(() => {
+		setUserAvailability(currentUser.user.available);
+	}, []);
+
+	async function handleUserAvailability(available) {
+		try {
+			const data = {
+				available
+			};
+
+			const config = {
+				headers: {
+					Authorization: token
+				}
+			};
+
+			const response = await api.put('profile', data, config);
+
+			if (response.status !== 200) {
+				return Alert.alert('Erro ao atualizar, tente novamente mais tarde');
+			}
+
+			setUserAvailability(available);
+
+			if (available) {
+				Alert.alert("Pronto! Agora todos usuários podem entrar em contato com você!");
+				return;
+			}
+
+			Alert.alert("Espero que em breve possa estar disponível para nossos usuários");
+		} catch(err) {
+			console.log(err);
+			Alert.alert("Erro ao atualizar sua disponibilidade, tente novamente mais tarde");
+		}
+	}
 
 	return(
 		<View style={content.styles.background}>
@@ -43,8 +85,8 @@ function Profile() {
 								trackColor={{ false: "#F0F0F0", true: "#f695a5" }}
 								thumbColor={isEnabled ? "#EC2041" : "#f4f3f4"}
 								ios_backgroundColor="#3e3e3e"
-								onValueChange={value => setIsEnabled(value)}
-								value={isEnabled}
+								onValueChange={value => handleUserAvailability(value)}
+								value={userAvailability}
 							/>
 						</View>
 					</View>
@@ -70,12 +112,12 @@ function Profile() {
 							<Feather name="user" color="#EC2041" size={25}></Feather>
 						</View>
 						<View style={content.styles.cardInfo}>
-							<Text style={content.styles.cardLabel}>Usuário</Text>
-							<Text style={content.styles.cardLabelAddress}>Felipe Fanucchi</Text>
+							<Text style={content.styles.cardLabel}>Nome</Text>
+							<Text style={content.styles.cardLabelAddress}>{currentUser.user.name}</Text>
 						</View>
-						<View style={content.styles.cardArrow}>
+						{/* <View style={content.styles.cardArrow}>
 							<Feather name="edit" color="#EC2041" size={18}></Feather>
-						</View>
+						</View> */}
 					</View>
 				</View>
 
@@ -86,7 +128,7 @@ function Profile() {
 						</View>
 						<View style={content.styles.cardInfo}>
 							<Text style={content.styles.cardLabel}>E-mail</Text>
-							<Text style={content.styles.cardLabelAddress}>flfanucchi@gmail.com</Text>
+							<Text style={content.styles.cardLabelAddress}>{currentUser.user.email}</Text>
 						</View>
 					</View>
 				</View>
@@ -98,15 +140,15 @@ function Profile() {
 						</View>
 						<View style={content.styles.cardInfo}>
 							<Text style={content.styles.cardLabel}>Telefone</Text>
-							<Text style={content.styles.cardLabelAddress}>(11) 98308-6001</Text>
+							<Text style={content.styles.cardLabelAddress}>{currentUser.user.phone}</Text>
 						</View>
-						<View style={content.styles.cardArrow}>
+						{/* <View style={content.styles.cardArrow}>
 							<Feather name="edit" color="#EC2041" size={18}></Feather>
-						</View>
+						</View> */}
 					</View>
 				</View>
 
-				<View style={content.styles.card}>
+				{/* <View style={content.styles.card}>
 					<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flex: 1 }}>
 						<View style={content.styles.cardAvatar}>
 							<Feather name="lock" color="#EC2041" size={25}></Feather>
@@ -119,7 +161,7 @@ function Profile() {
 							<Feather name="edit" color="#EC2041" size={18}></Feather>
 						</View>
 					</View>
-				</View>
+				</View> */}
 				
 				<Text style={content.styles.areaTitle}>Permissões</Text>
 
@@ -152,7 +194,7 @@ function Profile() {
 							<Feather name="power" color="#EC2041" size={25}></Feather>
 						</View>
 						<View style={content.styles.cardInfo}>
-							<Text style={content.styles.cardLabelLogout}>Sair</Text>
+							<Text style={content.styles.cardLabelLogout} onPress={() => logout()}>Sair</Text>
 						</View>
 					</View>
 				</View>

@@ -10,16 +10,15 @@ function Login({ navigation }) {
 
 	async function login() {
 		try {
-			const response = await signIn({ email, password });
 			console.log({ email, password });
+			const response = await signIn({ email, password });
 			if (response.status === 200)  return;
 
 			Alert.alert('Erro no login', response.data.error);
 		} catch (err) {
-			console.log(err);
+			console.log('erro no login, ', err);
 			Alert.alert("Erro no login", err.data.error);
 		}
-
 	}
 
 	return (
@@ -30,6 +29,7 @@ function Login({ navigation }) {
 			<View style={styles.panel}>
 				<TextInput
 					style={styles.input}
+					autoCapitalize="none"
 					placeholder="E-mail"
 					onChangeText={text => setEmail(text)}
 				></TextInput>

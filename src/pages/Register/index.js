@@ -13,7 +13,7 @@ import * as Location from 'expo-location';
 
 import { TextInputMask } from 'react-native-masked-text'
 
-function Register({ navigation }) {
+export default function Register({ navigation }) {
 	const [email, setEmail] = useState(null);
 	const [name, setName] = useState(null);
 	const [password, setPassword] = useState(null);
@@ -30,16 +30,16 @@ function Register({ navigation }) {
 	}, [])
 
 	async function getLocation() {
-		let { status } = await Location.requestPermissionsAsync();
+		// let { status } = await Location.requestPermissionsAsync();
 			
-		if (status !== 'granted') {
-			Alert.alert('You must grant access to location');
-		}
+		// if (status !== 'granted') {
+		// 	Alert.alert('Para acessarmos sua localização você precisa permitir, pode faze-lo mais tarde na tela de configurações');
+		// }
 
-		let {coords: {latitude, longitude}} = await Location.getCurrentPositionAsync();
+		// let {coords: {latitude, longitude}} = await Location.getCurrentPositionAsync();
 
-		setLatitude(latitude);
-		setLongitude(longitude);
+		// setLatitude(latitude);
+		// setLongitude(longitude);
 	}
 
 	async function handleRegister() {
@@ -49,7 +49,14 @@ function Register({ navigation }) {
 				return;
 			}
 
-			const coordinates =[ latitude, longitude ];
+			const unmasked = await phoneField.getRawValue();
+			setPhone(unmasked);
+
+			// Mocking Coordinates
+			setLatitude(-23.504583);
+			setLongitude(-46.556192);
+
+			const coordinates = [ latitude, longitude ];
 			const data = {email, name, phone, password, coordinates};
 
 			const response = await register(data);
@@ -93,6 +100,7 @@ function Register({ navigation }) {
 				<TextInput
 					style={styles.input}
 					placeholder="E-mail"
+					autoCapitalize="none"
 					onChangeText={text => setEmail(text)}
 				/>
 				<TextInputMask
@@ -105,6 +113,7 @@ function Register({ navigation }) {
 					placeholder="Telefone"
 					style={styles.input}
 					value={phone}
+					ref={(ref) => setPhoneField(ref)}
 					onChangeText={text => setPhone(text)}
 				/>
 				<TextInput
@@ -128,6 +137,5 @@ function Register({ navigation }) {
 			</View>
 		</View>
 	);
-}
+};
 
-export default Register;

@@ -5,13 +5,14 @@ export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
 	const [token, setToken] = useState(null);
+	const [user, setUser] = useState(null);
 
 	async function signIn(data) {
 		try {
 			const response = await api.post('login', data);
 			const {token} = response.data;
 			setToken(token);
-			getUser(token); 
+			await getUser(token); 
 			return response;
 		} catch(err) {
 			if (err.response) return err.response;
@@ -50,8 +51,12 @@ export function AuthProvider({ children }) {
 		}
 	}
 
+	async function logout() {
+		setToken(null);
+	}
+
 	return (
-		<AuthContext.Provider value={{ signIn, token, register, forgotPassword }}>
+		<AuthContext.Provider value={{ signIn, token, register, forgotPassword, logout, user }}>
 			{ children }
 		</AuthContext.Provider>
 	);

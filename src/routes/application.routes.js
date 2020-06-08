@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StatusBar } from 'react-native';
+import { StatusBar, Platform } from 'react-native';
 
 // Routes
 import HomeRoutes from './home.routes';
@@ -43,7 +43,7 @@ function ApplicationRoutes() {
 					size: 20,
 					style: {
 						backgroundColor: '#EC2041',
-						height: 60
+						height: Platform.OS === 'ios' ? 80 : 60,
 					},
 					showLabel: false
 				}}

@@ -30,16 +30,16 @@ export default function Register({ navigation }) {
 	}, [])
 
 	async function getLocation() {
-		// let { status } = await Location.requestPermissionsAsync();
+		let { status } = await Location.requestPermissionsAsync();
 			
-		// if (status !== 'granted') {
-		// 	Alert.alert('Para acessarmos sua localização você precisa permitir, pode faze-lo mais tarde na tela de configurações');
-		// }
+		if (status !== 'granted') {
+			Alert.alert('Para acessarmos sua localização você precisa permitir, pode faze-lo mais tarde na tela de configurações');
+		}
 
-		// let {coords: {latitude, longitude}} = await Location.getCurrentPositionAsync();
+		let {coords: {latitude, longitude}} = await Location.getCurrentPositionAsync();
 
-		// setLatitude(latitude);
-		// setLongitude(longitude);
+		setLatitude(latitude);
+		setLongitude(longitude);
 	}
 
 	async function handleRegister() {

@@ -36,7 +36,6 @@ export const styles = StyleSheet.create({
 	},
 	card: {
 		padding: 15,
-		flexDirection: 'row',
 	},
 	cardLabel: {
 		color: '#444',

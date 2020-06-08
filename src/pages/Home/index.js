@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Text, Button, View } from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE, Callout} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
@@ -10,6 +10,9 @@ import cartBuyMarket from '../../../assets/cart-buy-market.png'
 import Geocoder from 'react-native-geocoding';
 
 import RangeButtons from '../../components/range-buttons';
+import { Alert } from 'react-native';
+import { AuthContext } from '../../context/Auth';
+import {api} from '../../services/api';
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyANApQdINHhAihyiBI67nVnSB3F2mn_Ugo';
 
@@ -22,6 +25,8 @@ function Home({ navigation }) {
 	const [distance, setDistance] = useState(null);
 	const [mapView, setMapView] = useState(false);
 	const [showLabel, setShowLabel] = useState(false);
+	const [markers, setMarkers] = useState([]);
+	const { token } = useContext(AuthContext);
 
 	const [region, setRegion] = useState({
 		latitude: 0,
@@ -29,22 +34,27 @@ function Home({ navigation }) {
 		...deltaLatLong
 	});
 
+	async function getMarkers(latitude, longitude) {
+		try {
+			const config = {
+				headers: {
+					Authorization: token
+				},
+				params: {
+					lat: latitude,
+					long: longitude,
+					radius: 10000000
+				}
+			};
 
-	// Mocked Markers
-	const markers = [
-		{
-			latitude: -23.464624, 
-			longitude: -46.541213
-		},
-		{
-			latitude: -23.504908,
-			longitude: -46.556163,
-		},
-		{
-			latitude: -23.467633,
-			longitude: -46.541339,
+			const response = await api.get('user_need', config);
+			setMarkers(response.data.users);
+			console.log(response.data.users);
+		} catch(err) {
+			console.log(err);
+			Alert.alert('Ops!', 'Houve um problema ao buscar os casos disponíveis! Tente novamemte mais tarde');
 		}
-	]
+	}
 
 	useEffect(() => {
 		(async () => {
@@ -57,6 +67,8 @@ function Home({ navigation }) {
 			}
 
 			let {coords: {latitude, longitude}} = await Location.getCurrentPositionAsync();
+
+			await getMarkers(latitude, longitude);
 
 			const response = await Geocoder.from({ latitude, longitude });
 			const address = response.results[0].formatted_address;
@@ -81,7 +93,7 @@ function Home({ navigation }) {
 	return(
 		<View style={styles.container}>
 
-			<RangeButtons />
+			{/* <RangeButtons /> */}
 
 			<MapView
 				provider={PROVIDER_GOOGLE}

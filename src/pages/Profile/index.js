@@ -115,9 +115,6 @@ function Profile() {
 							<Text style={content.styles.cardLabel}>Nome</Text>
 							<Text style={content.styles.cardLabelAddress}>{currentUser.user.name}</Text>
 						</View>
-						{/* <View style={content.styles.cardArrow}>
-							<Feather name="edit" color="#EC2041" size={18}></Feather>
-						</View> */}
 					</View>
 				</View>
 
@@ -142,9 +139,9 @@ function Profile() {
 							<Text style={content.styles.cardLabel}>Telefone</Text>
 							<Text style={content.styles.cardLabelAddress}>{currentUser.user.phone}</Text>
 						</View>
-						{/* <View style={content.styles.cardArrow}>
+						<View style={content.styles.cardArrow}>
 							<Feather name="edit" color="#EC2041" size={18}></Feather>
-						</View> */}
+						</View>
 					</View>
 				</View>
 
@@ -163,7 +160,7 @@ function Profile() {
 					</View>
 				</View> */}
 				
-				<Text style={content.styles.areaTitle}>Permissões</Text>
+				<Text style={content.styles.areaTitle}>Endereço</Text>
 
 				<View style={content.styles.card}>
 					<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flex: 1 }}>
@@ -182,6 +179,21 @@ function Profile() {
 								onValueChange={value => setIsEnabled(value)}
 								value={isEnabled}
 							/>
+						</View>
+					</View>
+				</View>
+
+				<View style={content.styles.card}>
+					<View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flex: 1 }}>
+						<View style={content.styles.cardAvatar}>
+							<Feather name="map" color="#EC2041" size={25}></Feather>
+						</View>
+						<View style={content.styles.cardInfo}>
+							<Text style={content.styles.cardLabel}>Complemento</Text>
+							<Text style={content.styles.cardLabelAddress}>{currentUser.user.address_complement}</Text>
+						</View>
+						<View style={content.styles.cardArrow}>
+							<Feather name="edit" color="#EC2041" size={18}></Feather>
 						</View>
 					</View>
 				</View>

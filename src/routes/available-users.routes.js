@@ -11,21 +11,20 @@ function AvailableRoutes() {
 	return (
 		<Stack.Navigator>
 			<Stack.Screen 
-				name="Avaialable Users" 
+				name="Usuários Disponíveis" 
 				component={AvailableUsers} 
 				options={{ 
 					headerShown: false
 				}}
 			/>
 			<Stack.Screen 
-				name="Detail" 
+				name="Detalhe" 
 				component={Detail} 
 				options={({ route }) => ({ 
-					title: route.params.name,
+					id: route.params.id,
 					headerTintColor: '#FFF',
 					headerStyle: {
-						backgroundColor: '#EC2041',
-						fontFamily: 'MontSerratSemiBold'
+						backgroundColor: '#EC2041'
 					}
 				})}
 			/>

@@ -18,7 +18,6 @@ function HomeRoutes() {
 					headerTintColor: '#FFF',
 					headerTitleStyle: {
 						fontSize: 20,
-						fontFamily: 'MontSerratSemiBold',
 					},
 					headerStyle: {
 						backgroundColor: '#EC2041',
@@ -26,15 +25,13 @@ function HomeRoutes() {
 				}}
 			/>
 			<Stack.Screen 
-				name="Detail" 
+				name="Home Detail" 
 				component={Detail} 
 				options={({ route }) => ({ 
 					title: route.params.name,
 					headerTintColor: '#FFF',
 					headerStyle: {
 						backgroundColor: '#EC2041',
-						fontSize: 18,
-						fontFamily: 'MontSerratSemiBold'
 					}
 				})}
 			/>

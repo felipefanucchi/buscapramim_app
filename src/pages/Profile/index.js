@@ -8,9 +8,10 @@ import { AuthContext } from "../../context/Auth";
 import { api } from "../../services/api";
 import { TextInputMask } from "react-native-masked-text";
 import { TextInput } from "react-native-gesture-handler";
+import * as Location from 'expo-location';
 
-function Profile() {
-	const [isEnabled, setIsEnabled] = useState(false);
+function Profile({ navigation }) {
+	const [canAccessLocation, setCanAccessLocation] = useState(true);
 	const [userAvailability, setUserAvailability] = useState(null);
 
 	const [userPhone, setUserPhone] = useState("");
@@ -26,7 +27,40 @@ function Profile() {
 	useEffect(() => {
 		setUserAvailability(currentUser.user.available);
 		setUserPhone(currentUser.user.phone);
+		setAddressComplement(currentUser.user.address_complement);
 	}, []);
+
+	async function getLocation(canAccess) {
+		if (!canAccess) {
+			Alert.alert('Para acessarmos sua localização você precisa permitir, pode faze-lo aqui mesmo, quando se sentir confortável');
+			setCanAccessLocation(canAccess);
+			return;
+		}
+	
+		let {coords: {latitude, longitude}} = await Location.getCurrentPositionAsync();
+
+		const data = {
+			coordinates: [latitude, longitude],
+		};
+
+		const config = {
+			headers: {
+				Authorization: token,
+			},
+		};
+
+		console.group(data, config)
+
+		try {
+			await api.put('profile', data, config);
+			setCanAccessLocation(canAccess);
+
+			Alert.alert('Localização atualizada com sucesso');
+		} catch (err) { 
+			console.log(err)
+			Alert.alert('houve um erro ao atualizar sua posição, tente novamente mais tarde');
+		}
+	}
 
 	async function handlePhoneChange() {
 		try {
@@ -147,7 +181,7 @@ function Profile() {
 							<Feather name="plus" color="#EC2041" size={25}></Feather>
 						</View>
 						<View style={content.styles.cardInfo}>
-							<Text style={content.styles.cardLabel}>
+							<Text onPress={() => navigation.navigate('Adicionar Necessidade')} style={content.styles.cardLabel}>
 								Adicionar uma necessidade
 							</Text>
 							<Text style={content.styles.cardLabelAddress}>
@@ -180,7 +214,7 @@ function Profile() {
 						<View style={content.styles.cardArrow}>
 							<Switch
 								trackColor={{ false: "#F0F0F0", true: "#f695a5" }}
-								thumbColor={isEnabled ? "#EC2041" : "#f4f3f4"}
+								thumbColor={userAvailability ? "#EC2041" : "#f4f3f4"}
 								ios_backgroundColor="#3e3e3e"
 								onValueChange={(value) => handleUserAvailability(value)}
 								value={userAvailability}
@@ -202,7 +236,7 @@ function Profile() {
 							<Feather name="list" color="#EC2041" size={25}></Feather>
 						</View>
 						<View style={content.styles.cardInfo}>
-							<Text style={content.styles.cardLabel}>Necessidades</Text>
+							<Text onPress={() => navigation.navigate('Listar Necessidades')} style={content.styles.cardLabel}>Necessidades</Text>
 							<Text style={content.styles.cardLabelAddress}>
 								Acesse todas suas necessidades
 							</Text>
@@ -347,10 +381,10 @@ function Profile() {
 						<View style={content.styles.cardArrow}>
 							<Switch
 								trackColor={{ false: "#F0F0F0", true: "#f695a5" }}
-								thumbColor={isEnabled ? "#EC2041" : "#f4f3f4"}
+								thumbColor={canAccessLocation ? "#EC2041" : "#f4f3f4"}
 								ios_backgroundColor="#3e3e3e"
-								onValueChange={(value) => setIsEnabled(value)}
-								value={isEnabled}
+								onValueChange={(value) => getLocation(value)}
+								value={canAccessLocation}
 							/>
 						</View>
 					</View>

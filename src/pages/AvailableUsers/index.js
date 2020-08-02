@@ -37,8 +37,8 @@ function AvailableUsers({ route, navigation }) {
 				},
 				params: {
 					page,
-					lat: -46.538905,
-					long: -23.468852
+					lat: coordinates.latitude,
+					long: coordinates.longitude
 				}
 			};
 

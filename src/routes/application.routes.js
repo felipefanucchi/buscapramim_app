@@ -11,6 +11,7 @@ import Profile from '../pages/Profile';
 
 // Icons
 import { Feather } from '@expo/vector-icons';
+import ProfileRoutes from './profile.routes';
 
 const Tab = createBottomTabNavigator();
 
@@ -61,7 +62,7 @@ function ApplicationRoutes() {
 				<Tab.Screen 
 					name="Perfil" 
 					options={{ title: 'Perfil' }} 
-					component={Profile}
+					component={ProfileRoutes}
 				/>
 			</Tab.Navigator>
 		</>

@@ -11,9 +11,31 @@ export default StyleSheet.create({
 	},
 	textArea: {
 		justifyContent: 'flex-start',
-		height: 80,
 		borderBottomColor: '#EC2041',
 		borderBottomWidth: 1,
 		marginHorizontal: 20,
 	},
+
+	actionWrapper: {
+		paddingHorizontal: 30,
+		marginTop: 30,
+		marginBottom: 30
+	},
+
+  action: {
+    backgroundColor: '#E82041',
+    borderRadius: 8,
+    height: 50,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+		flexDirection: 'row',
+  },
+
+  actionText: {
+    color: '#FFF',
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginRight: 5
+  }
 });

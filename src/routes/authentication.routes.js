@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 function AuthenticationRoutes() {
 	return (
 		<>
-			<StatusBar hidden={true}></StatusBar>
+			<StatusBar></StatusBar>
 			<Stack.Navigator>
 				<Stack.Screen 
 					name="Login" 

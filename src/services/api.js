@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-	baseURL: 'http://192.168.15.7:3333/', // Genymotion Simulator
+	baseURL: 'http://192.168.0.149:3333/', // Genymotion Simulator
 	headers: {
 		common: {
 			Accept: 'application/json',

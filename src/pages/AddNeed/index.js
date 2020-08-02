@@ -23,7 +23,7 @@ function AddNeed() {
 
 			const data = {
 				name, description, quantity
-			}
+			};
 
 			const response = await api.post('product', data, config);
 

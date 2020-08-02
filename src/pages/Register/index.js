@@ -53,11 +53,13 @@ export default function Register({ navigation }) {
 			setPhone(unmasked);
 
 			// Mocking Coordinates
-			setLatitude(-23.504583);
-			setLongitude(-46.556192);
+			// setLatitude(-23.504583);
+			// setLongitude(-46.556192);
 
 			const coordinates = [ latitude, longitude ];
 			const data = {email, name, phone, password, coordinates};
+
+			console.log(data);
 
 			const response = await register(data);
 

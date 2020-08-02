@@ -15,21 +15,24 @@ function AvailableUsers({ route, navigation }) {
 	const [totalCount, setTotalCount] = useState(0);
 	const [firstLoad, setFirstLoad] = useState(false);
 	const { token } = useContext(AuthContext);
-	const [coordinates, setCoordinates] = useState(null);
 
 	useEffect(() => {
-		(async () => {
-			let { status } = await Location.requestPermissionsAsync();
-			if (status !== 'granted') {
-				throw new Error('You must grant access to location');
-			}
-			let {coords} = await Location.getCurrentPositionAsync();
-			setCoordinates(coords);
-			getAvailableUsers();
-		})()
+		getLocation();
 	}, []);
 
-	async function getAvailableUsers() {
+	async function getLocation() {
+		let { status } = await Location.requestPermissionsAsync();
+		if (status !== 'granted') {
+			throw new Error('You must grant access to location');
+		}
+		let {coords: {latitude, longitude}} = await Location.getCurrentPositionAsync();
+
+		console.log(latitude, longitude)
+
+		getAvailableUsers(longitude, latitude);
+	}
+
+	async function getAvailableUsers(longitude, latitude) {
 		try {
 			const config = {
 				headers: {
@@ -37,14 +40,16 @@ function AvailableUsers({ route, navigation }) {
 				},
 				params: {
 					page,
-					lat: coordinates.latitude,
-					long: coordinates.longitude
+					lat: latitude,
+					long: longitude 
 				}
 			};
 
 			if (totalCount != users.length) {
 				setLoading(true);
 			}
+
+			console.log(config);
 
 			const response = await api.get(`available_user`, config);
 			setTotalCount(response.headers['x-total-count']);
@@ -53,7 +58,8 @@ function AvailableUsers({ route, navigation }) {
 			setLoading(false);
 			setFirstLoad(true);
 		} catch(err) {
-			Alert.alert("Erro ao listar os usuários, tente novamente mais tarde", err);
+			console.log(err)
+			Alert.alert("Erro ao listar os usuários, tente novamente mais tarde");
 		}
 	}
 
@@ -131,8 +137,8 @@ function AvailableUsers({ route, navigation }) {
 			data={users}
 			renderItem={user => renderItem(user)}
 			keyExtractor={user => user.id.toString()}
-			onEndReached={getAvailableUsers}
-			onEndReachedThreshold={0.5}
+			// onEndReached={getAvailableUsers}
+			// onEndReachedThreshold={0.5}
 			ListFooterComponent={renderFooter}
 		/>
 	</View>

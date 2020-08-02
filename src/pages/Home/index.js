@@ -6,7 +6,7 @@ import styles from './styles';
 import mapStyleConfig from './mapStyleConfig';
 import * as Location from 'expo-location';
 import { getPixelSize } from '../../utils';
-import cartBuyMarket from '../../../assets/cart-buy-market.png'
+import person from '../../../assets/person.png'
 import Geocoder from 'react-native-geocoding';
 
 import RangeButtons from '../../components/range-buttons';
@@ -49,7 +49,6 @@ function Home({ navigation }) {
 
 			const response = await api.get('user_need', config);
 			setMarkers(response.data.users);
-			console.log(response.data.users);
 		} catch(err) {
 			console.log(err);
 			Alert.alert('Ops!', 'Houve um problema ao buscar os casos disponíveis! Tente novamemte mais tarde');
@@ -70,10 +69,14 @@ function Home({ navigation }) {
 
 			await getMarkers(latitude, longitude);
 
+			console.log(markers);
+			console.log('lat', latitude)
+			console.log('lng', longitude);
+
 			const response = await Geocoder.from({ latitude, longitude });
 			const address = response.results[0].formatted_address;
 			const location = address.substring(0, address.indexOf(','));
-			setLocation(location);
+			setLocation(location)
 
 			setRegion({
 				latitude, 
@@ -107,7 +110,7 @@ function Home({ navigation }) {
 				{markers.map((marker, index) => (
 					<Marker
 						coordinate={marker}
-						image={cartBuyMarket}
+						image={person}
 						onPress={(event) => handleDestinationSelected(event, index)}
 						anchor={{ x: 0, y: 0 }}
 						key={index}>
